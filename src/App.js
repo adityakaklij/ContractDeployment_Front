@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Deploy from './Deploy.js'
+import Test from './Components/Test'
 
 function App() {
 
@@ -39,7 +40,8 @@ function App() {
         <div className="App">
           <p> Connected as : {account}</p>
 
-          <Deploy/>
+          {/* <Deploy/> */}
+          <Test/>
         </div>
       )
     }
