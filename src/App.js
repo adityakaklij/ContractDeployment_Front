@@ -2,8 +2,12 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Deploy from './Deploy.js'
 import Test from './Components/Test'
+import Model from './Components/Model';
+import DeployContract from './Components/DeployContract';
 
 function App() {
+
+  const [openModal, setOpenModal] = useState(false)
 
   const [isWalletInstalled, setIsWalletInstalled] = useState(false);
   const [account, setAccount] = useState(null);
@@ -39,9 +43,10 @@ function App() {
       return(
         <div className="App">
           <p> Connected as : {account}</p>
+          {/* <Deploy/>  It's having some get Num details(First test Contract) */}
+          {/* <Test/>   This is the final stuff*/}
 
-          {/* <Deploy/> */}
-          <Test/>
+          <DeployContract />
         </div>
       )
     }

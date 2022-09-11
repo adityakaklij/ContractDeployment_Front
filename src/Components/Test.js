@@ -22,7 +22,7 @@ const uploadNFTContent = async(inputFile)  =>{
 
     try {
         const metaData = await nftStorage.store({
-            name:inputFile.name,
+            name:imgName,
             description: `Profile Image`,
             image:inputFile
             
@@ -36,20 +36,10 @@ const uploadNFTContent = async(inputFile)  =>{
     }
   }
 
-//   const getIPFSGatewayURL = (ipfsURL)=>{
-//     let urlArray = ipfsURL.split("/");
-//     let ipfsGateWayURL = `https://${urlArray[2]}.ipfs.dweb.link/${urlArray[3]}`;
-//     return ipfsGateWayURL;
-// }
-// const previewNFT = (metaData) =>{
-//     let imgViewString = getIPFSGatewayURL(metaData.data.image.pathname);
-// }
-
   const handleFileUpload= async(event) =>{
     event.preventDefault()
     setUploadFile(event.target.files[0])
   }
-
 
   const mintNFTToken = async(event , uploadedFile) =>{
     event.preventDefault()
@@ -68,7 +58,7 @@ const uploadNFTContent = async(inputFile)  =>{
   // Taking the contract information from the user
   const [name, setName]= useState()
     const [symbol, setSymbol]= useState()
-    const [baseUri, setbaseUri]= useState()
+    const [imgName, setImgName]= useState()
 
     function Getname(e){
         console.log(e.target.value)
@@ -78,9 +68,9 @@ const uploadNFTContent = async(inputFile)  =>{
         console.log(e.target.value)
         setSymbol(e.target.value)
     }
-    function GetbaseUri(e){
+    function ImgName(e){
         console.log(e.target.value)
-        setbaseUri(e.target.value)
+        setImgName(e.target.value)
     }
 
 
@@ -93,14 +83,15 @@ const uploadNFTContent = async(inputFile)  =>{
               <input className='fileUpload' type="file" id='chooseFile' onChange={handleFileUpload}/>
               </label>
         </form>
-        <br />
-        <button onClick={mintNFTToken}>Deploy Contract</button>
 
         <br />
         <h3>Enter Name</h3>
         <input type="text" placeholder='Enter Collection Name' onChange={Getname}/>
         <input type="text" placeholder='Symbol' onChange={Getsymbol}/>
-        <input type="text" placeholder='BaseUri' onChange={GetbaseUri} />
+        <input type="text" placeholder='Image Name' onChange={ImgName} />
+        <br />
+        <br />
+        <button onClick={mintNFTToken}>Deploy Contract</button>
     </div>
   )
 }
