@@ -12,6 +12,11 @@ function DeployERC1155({open}) {
     const [imgName, setImgName]= useState()
     const [uploadFile ,setUploadFile] = useState()
 
+    const [sendAdd, setSendAdd] = useState("0x056397760b973BfB921Bc10Be9DA5034B1e921d7")
+    const [sendQuant, setSendQuant] = useState(1)
+
+    const [depAdd, serDepAdd] = useState("0x056397760b973BfB921Bc10Be9DA5034B1e921d7")
+
     if(!open){
         <h2>Heading</h2>
     }
@@ -60,16 +65,11 @@ const uploadNFTContent = async(inputFile)  =>{
         const factory = new ethers.ContractFactory(ERC1155ABI, ERC1155Bytecode, signer)
         const contract = await factory.deploy(metaData, name, symbol );
         console.log("address- ", contract.address)
+        serDepAdd(contract.address)
         window.alert(`contract depolyed at ${contract.address}`)
         // console.log("ipfsMetada:- ", metaData)
         
   }
-
-  // Taking the contract information from the user
-  // Pasted useState at the top
-    // const [name, setName]= useState()
-    // const [symbol, setSymbol]= useState()
-    // const [imgName, setImgName]= useState()
 
     function Getname(e){
         console.log(e.target.value)
@@ -84,6 +84,22 @@ const uploadNFTContent = async(inputFile)  =>{
         setImgName(e.target.value)
     }
 
+    function GetAdd(e){
+        setSendAdd(e.target.value)
+    }
+    function GetQuan(e){
+        setSendQuant(e.target.value)
+    }
+
+
+
+    const contractInstance = new ethers.Contract(depAdd, ERC1155ABI, signer);
+
+    const mintNFTs = async() =>{
+        const mint = await contractInstance.mint(sendAdd,1,sendQuant,0x00)
+        await mint.wait()
+        window.alert("NFTs mint succesfully :)")
+    }
 
     return (
     
@@ -103,7 +119,15 @@ const uploadNFTContent = async(inputFile)  =>{
         <input type="text" placeholder='Image Name' onChange={ImgName} />
         <br />
         <br />
+        <br />
         <button onClick={mintNFTToken}>Deploy Contract</button>
+
+        <br />
+        <br />
+        <br />
+        <input type="text" placeholder='Address' onChange={GetAdd}/>
+        <input type="text" placeholder='Quantity' onChange={GetQuan}/>
+        <button onClick={mintNFTs}>Mint NFTs</button>
     </div>
   )
 }

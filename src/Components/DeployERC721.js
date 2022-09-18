@@ -11,6 +11,9 @@ function DeployERC721({open}) {
     const [baseURI, setBaseURI]= useState()
     const [NFTSupply, setNFTSupply]= useState(10000)
 
+    const [sendAdd, setSendAdd] = useState("0x056397760b973BfB921Bc10Be9DA5034B1e921d7")
+    const [depAdd, serDepAdd] = useState("0x056397760b973BfB921Bc10Be9DA5034B1e921d7")
+
     if(!open){
         return null;
     }
@@ -51,6 +54,18 @@ function DeployERC721({open}) {
         setNFTSupply(e.target.value)
     }
 
+    function GetAdd(e){
+        setSendAdd(e.target.value)
+    }
+
+    const contractInstance = new ethers.Contract(depAdd, ERC721ABI, signer);
+
+    const mintNFTs = async() =>{
+        const mint = await contractInstance.mintToAddress(sendAdd)
+        await mint.wait()
+        window.alert("NFTs mint succesfully :)")
+    }
+
 
     return (
     <div className='deploy1155'>
@@ -66,6 +81,10 @@ function DeployERC721({open}) {
         <br />
         <button onClick={deployContract}>Deploy Contract</button>
         <br /><br />
+        <br /><br />
+
+        <input type="text" placeholder='Address' onChange={GetAdd}/>
+        <button  onClick={mintNFTs}>Mint NFTs</button>
     </div>
   )
 
