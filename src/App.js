@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import Deploy from './Deploy.js'
-import Test from './Components/Test'
-import Model from './Components/Model';
 import DeployContract from './Components/DeployContract';
 
 function App() {
@@ -31,7 +28,7 @@ function App() {
     if(account === null){
       return(
         <div className="App">{
-          isWalletInstalled? (<button onClick={connectWallet}> Connect </button>) : (
+          isWalletInstalled? (<button className='connectBtn' onClick={connectWallet}> Connect </button>) : (
             <p>Install Metamask Wallet</p>
           )
         }
@@ -43,9 +40,6 @@ function App() {
       return(
         <div className="App">
           <p> Connected as : {account}</p>
-          {/* <Deploy/>  It's having some get Num details(First test Contract) */}
-          {/* <Test/>   This is the final stuff*/}
-
           <DeployContract />
         </div>
       )

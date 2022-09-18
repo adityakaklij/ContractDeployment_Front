@@ -2,7 +2,7 @@ import React from 'react'
 import { ERC721ABI, ERC721Bytecode } from './Constants'
 import { useState } from 'react'
 import { ethers } from 'ethers'
-import {NFTStorage} from "nft.storage"
+import '../CSS/DeployContract.css'
 
 function DeployERC721({open}) {
 
@@ -53,11 +53,11 @@ function DeployERC721({open}) {
 
 
     return (
-    <div>
-        <h1>ERC721 contract deployment</h1>
+    <div className='deploy1155'>
+        <h1 className='deploy1155Heading'>ERC721 contract deployment</h1>
 
         <br />
-        <h3>Enter Name</h3>
+        <h3>Enter Details</h3>
         <input type="text" placeholder='Enter Collection Name' onChange={Getname}/>
         <input type="text" placeholder='Symbol' onChange={Getsymbol}/>
         <input type="text" placeholder='Base Uri' onChange={GetURI} />

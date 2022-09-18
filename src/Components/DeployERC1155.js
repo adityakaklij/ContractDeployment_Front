@@ -2,7 +2,7 @@ import { ethers } from 'ethers';
 import React, { useState } from 'react'
 import {NFTStorage} from 'nft.storage'
 import { ERC1155ABI, ERC1155Bytecode } from './Constants';
-
+import '../CSS/DeployContract.css'
 
 
 function DeployERC1155({open}) {
@@ -86,8 +86,9 @@ const uploadNFTContent = async(inputFile)  =>{
 
 
     return (
-    <div>
-        <h1>ERC1155 contract deployment</h1>
+    
+        <div className='deploy1155'>
+        <h1 className='deploy1155Heading'>ERC1155 contract deployment</h1>
 
         <form className='form'>
               <label className='label1' htmlFor="chooseFile">Upload NFT image
